@@ -21,7 +21,7 @@ $$
 
 Consider a square with side length $a + b$:
 
-![Pythagorean Diagram](assets/tikz/pythagorean.svg)
+![Pythagorean Diagram](/assets/tikz/tikz/pythagorean.svg)
 
 ## Examples
 
@@ -33,5 +33,5 @@ Consider a square with side length $a + b$:
 
 ## Related
 
-- [Distance Formula](distance-formula.md)
-- [Law of Cosines](law-of-cosines.md)
+- Distance Formula (coming soon)
+- Law of Cosines (coming soon)

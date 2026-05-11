@@ -29,9 +29,7 @@ Lemma is my digital mathematics notebook. Every theorem, proof, and concept I le
 
 ## Recent Updates
 
-- [Pythagorean Theorem](geometry/pythagorean.md) — Classic proof
-- [Fundamental Theorem of Calculus](calculus/ftc.md) — Connecting derivatives and integrals
-- [Fermat's Little Theorem](number-theory/fermat.md) — A gem of number theory
+- [Pythagorean Theorem](geometry/pythagorean.md) — Classic proof with TikZ diagram
 
 ---
 
