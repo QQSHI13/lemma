@@ -21,7 +21,7 @@ $$
 
 Consider a square with side length $a + b$:
 
-![Pythagorean Diagram](../../assets/tikz/tikz/pythagorean.svg)
+![Pythagorean Diagram](../assets/tikz/pythagorean.svg)
 
 ## Examples
 
