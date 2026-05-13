@@ -32,7 +32,7 @@ jobs:
       - name: Install LaTeX (for TikZ)
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive texlive-pictures dvisvgm
+          sudo apt-get install -y texlive-latex-extra texlive-pictures dvisvgm
 
       - name: Build site
         run: docsforge build
