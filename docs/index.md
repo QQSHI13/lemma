@@ -1,36 +1,32 @@
----
-description: Lemma - A mathematics wiki
----
-
 # Lemma
 
-A personal mathematics wiki built with [DocsForge](https://github.com/QQSHI13/docsforge).
-
-## What is Lemma?
-
-Lemma is my digital mathematics notebook. Every theorem, proof, and concept I learn gets documented here.
-
-## Features
-
-- :material-function-variant: **Math rendering** — KaTeX for $E = mc^2$ and display equations
-- :material-pencil-ruler: **TikZ diagrams** — Vector graphics compiled from LaTeX
-- :material-tag: **Tags** — Organize by topic
-- :material-magnify: **Search** — Full-text search across all pages
-- :material-theme-light-dark: **Dark mode** — Easy on the eyes for late-night math
-
-## Topics
-
-| Topic | Description |
-|-------|-------------|
-| [Algebra](algebra/index.md) | Groups, rings, fields, linear algebra |
-| [Calculus](calculus/index.md) | Limits, derivatives, integrals, series |
-| [Geometry](geometry/index.md) | Euclidean, non-Euclidean, topology |
-| [Number Theory](number-theory/index.md) | Primes, modular arithmetic, Diophantine |
-
-## Recent Updates
-
-- [Pythagorean Theorem](geometry/pythagorean.md) — Classic proof with TikZ diagram
+A rigorous mathematical wiki. Every definition is precise. Every theorem is proved.
 
 ---
 
-*Powered by [DocsForge](https://github.com/QQSHI13/docsforge) ☄️*
+## How to Read This Wiki
+
+1. **Start with Foundations** — Logic, set theory, and proof techniques
+2. **Follow the links** — Each page tells you what you need to know first
+3. **Read the proofs** — The proofs are the point
+
+## Browse by Area
+
+- [Foundations](foundations/index.md) — Logic, sets, functions, proof methods
+- [Number Systems](number-systems/index.md) — Naturals, integers, rationals, reals, complex
+- [Algebra](algebra/index.md) — Linear algebra, abstract algebra
+- [Analysis](analysis/index.md) — Real analysis, complex analysis
+- [Geometry](geometry/index.md) — Euclidean, non-Euclidean, topology
+- [Number Theory](number-theory/index.md) — Divisibility, primes, congruences
+- [Discrete Mathematics](discrete-mathematics/index.md) — Graph theory, combinatorics
+- [Probability](probability/index.md) — Axioms, distributions, limit theorems
+
+## Recently Added
+
+- [Proposition](foundations/proposition.md)
+- [Set](foundations/set.md)
+- [Direct Proof](foundations/direct-proof.md)
+
+---
+
+Built with [DocsForge](https://github.com/QQSHI13/docsforge).
