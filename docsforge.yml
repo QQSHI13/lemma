@@ -10,7 +10,7 @@ copyright: Copyright &copy; 2026 QQ (Cyrus)
 
 theme:
   name: material
-  favicon: assets/images/favicon.png
+  favicon: assets/images/favicon.svg
   icon:
     logo: fontawesome/solid/graduation-cap
   features:
