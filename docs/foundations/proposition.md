@@ -62,7 +62,5 @@ This is a proposition, but its truth value is currently **unknown**. It is eithe
 
 ## Related
 
-- [Logical Connective](logical-connective.md) — How to combine propositions
-- [Truth Table](truth-table.md) — Tabulating truth values
-- [Quantifier](quantifier.md) — Propositions about collections
-- [Direct Proof](direct-proof.md) — How to prove propositions
+- [[ref:Logical Connective]] — How to combine propositions
+- [[ref:Direct Proof]] — How to prove propositions

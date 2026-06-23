@@ -42,6 +42,9 @@ jobs:
       - name: Build site
         run: docsforge build
 
+      - name: Resolve cross-references
+        run: python3 postbuild.py
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:

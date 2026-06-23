@@ -1,6 +1,6 @@
 site_name: Lemma
 site_url: https://qqshi13.github.io/lemma/
-site_description: A mathematics wiki built with DocsForge
+site_description: A rigorous mathematical wiki. Every definition is precise. Every theorem is proved.
 site_author: QQ (Cyrus)
 
 repo_name: QQSHI13/lemma
@@ -37,8 +37,38 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
 
-# Enable TikZ diagram compilation
 tikz: true
+
+# Lemma custom markdown extension
+# Adds [[ref:Page Title]], [[thm:label]], [[eq:label]], {#thm:label} syntax
+markdown_extensions:
+  - plugins.lemma_md
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.critic
+  - pymdownx.magiclink
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.tasklist
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.smartsymbols
+  - pymdownx.emoji
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.pathconverter
+  - pymdownx.b64
+  - pymdownx.blocks.caption
+  - footnotes
+  - def_list
+  - abbr
+  - attr_list
+  - md_in_html
+  - meta
 
 nav:
   - Home: index.md
@@ -60,9 +90,17 @@ nav:
     - analysis/index.md
   - Geometry:
     - geometry/index.md
+    - Pythagorean Theorem: geometry/pythagorean.md
   - Number Theory:
     - number-theory/index.md
+  - Calculus:
+    - calculus/index.md
+    - Fundamental Theorem: calculus/fundamental-theorem.md
   - Discrete Math:
     - discrete-mathematics/index.md
   - Probability:
     - probability/index.md
+
+extra:
+  lemma:
+    enabled: true

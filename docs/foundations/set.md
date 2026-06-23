@@ -78,8 +78,8 @@ Note: $\emptyset \neq \{\emptyset\}$. The latter is a set containing one element
 
 ## Related
 
-- [Element](element.md) — Membership relation
-- [Subset](subset.md) — Containment
-- [Union](union.md) — Combining sets
-- [Intersection](intersection.md) — Common elements
+- [[ref:Element]] — Membership relation
+- [[ref:Subset]] — Containment
+- [[ref:Union]] — Combining sets
+- [[ref:Intersection]] — Common elements
 - [Cartesian Product](cartesian-product.md) — Pairs of elements
