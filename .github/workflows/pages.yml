@@ -34,6 +34,9 @@ jobs:
       - name: Install DocsForge
         run: pip install docsforge
 
+      - name: Install Lemma plugins
+        run: pip install -e .
+
       - name: Install LaTeX (for TikZ)
         run: |
           sudo apt-get update

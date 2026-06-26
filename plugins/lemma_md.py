@@ -1,16 +1,17 @@
 """
-Lemma - Markdown extension for math wiki cross-references.
+Lemma - Markdown extension for math wiki cross-references + math environments.
 
 Adds:
   [[ref:Page Title]]   → Link to another page by title
   [[thm:label]]         → Reference a labeled theorem
   [[eq:label]]          → Reference a labeled equation
   {#thm:label}          → Attach a label to a theorem block
-  {#eq:label}           → Attach a label to an equation
   [@citation-key]       → Citation reference
-
-This extension runs during markdown->HTML conversion.
-It emits placeholder HTML that the build script later resolves.
+  :::theorem {#label}   → Theorem environment (styled admonition)
+  :::proof              → Proof environment
+  :::definition {#label}→ Definition environment
+  :::lemma {#label}     → Lemma environment
+  :::corollary {#label} → Corollary environment
 """
 
 from __future__ import annotations
@@ -19,21 +20,23 @@ import re
 import xml.etree.ElementTree as ET
 from markdown import Markdown
 from markdown.inlinepatterns import InlineProcessor
-from markdown.postprocessors import Postprocessor
 from markdown.extensions import Extension
 from typing import Match
 
 # ===== Inline patterns =====
 
-# [[ref:Page Title or slug]]
 REF_PATTERN = r'\[\[ref:(.+?)\]\]'
-
-# [[thm:label]] or [[eq:label]]
 LABEL_REF_PATTERN = r'\[\[(thm|eq|def|lem|cor):([a-zA-Z0-9_-]+)\]\]'
-
-# [@citation-key]
 CITE_PATTERN = r'\[@([a-zA-Z0-9_-]+)\]'
 
+# Math environment colors
+ENV_COLORS = {
+    'theorem':  'border-left: 4px solid #e74c3c; background: #fdf2f2;',  # red
+    'proof':    'border-left: 4px solid #7f8c8d; background: #f8f9fa;',  # gray
+    'definition': 'border-left: 4px solid #2ecc71; background: #f0faf4;', # green
+    'lemma':    'border-left: 4px solid #3498db; background: #f0f7ff;',  # blue
+    'corollary':'border-left: 4px solid #9b59b6; background: #f5f0fa;',  # purple
+}
 
 class RefInlineProcessor(InlineProcessor):
     """Handle [[ref:Page Title]] → placeholder link."""
@@ -50,11 +53,10 @@ class LabelRefProcessor(InlineProcessor):
     """Handle [[thm:label]] / [[eq:label]] → placeholder label reference."""
 
     def handleMatch(self, m: Match, data: str) -> tuple[ET.Element | str, int, int]:
-        kind = m.group(1)   # thm, eq, def, lem, cor
+        kind = m.group(1)
         label = m.group(2)
         el = ET.Element(f'lemma-{kind}-ref')
         el.set('label', label)
-        # Display as "Theorem ?" — the build script will fill in the number
         label_names = {'thm': 'Theorem', 'eq': 'Equation', 'def': 'Definition',
                        'lem': 'Lemma', 'cor': 'Corollary'}
         name = label_names.get(kind, kind)
@@ -73,25 +75,13 @@ class CiteProcessor(InlineProcessor):
         return el, m.start(), m.end()
 
 
-# ===== Label extraction from blocks =====
-
-# Labels on display math: $$ ... $$ {#eq:label}
-EQ_LABEL_PATTERN = re.compile(r'\$\$\s*(.*?)\s*\$\$\s*\{#(eq|thm|def|lem|cor):([a-zA-Z0-9_-]+)\}', re.DOTALL)
-
-# Labels on admonitions (theorem/proof blocks)
-# These are handled by the admonition parser if needed.
-ADMON_LABEL_PATTERN = re.compile(r'\{#(thm|def|lem|cor):([a-zA-Z0-9_-]+)\}')
-
-
-class LemmaLabelPreprocessor:
-    """Extract labels from content before markdown processing."""
-    pass
-
-
 class LemmaMathExtension(Extension):
-    """Markdown extension that adds lemma cross-reference syntax."""
+    """Markdown extension adding lemma cross-reference syntax + math environments."""
 
     def extendMarkdown(self, md: Markdown) -> None:
+        # Register postprocessor for ::: environments FIRST (runs before HTML output)
+
+        # Register inline patterns
         md.inlinePatterns.register(RefInlineProcessor(REF_PATTERN, md), 'lemma-ref', 175)
         md.inlinePatterns.register(LabelRefProcessor(LABEL_REF_PATTERN, md), 'lemma-label-ref', 174)
         md.inlinePatterns.register(CiteProcessor(CITE_PATTERN, md), 'lemma-cite', 173)

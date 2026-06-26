@@ -125,6 +125,24 @@ class LemmaResolver:
             content = html_path.read_text(encoding='utf-8')
             original = content
 
+            def replace_label_ref_from_tag(m: re.Match) -> str:
+                tag = m.group(1)  # e.g. 'lemma-thm-ref'
+                label = m.group(2)
+                # Extract kind from tag: 'lemma-thm-ref' -> 'thm'
+                kind = tag.replace('lemma-', '').replace('-ref', '')
+                if label in self.label_map:
+                    info = self.label_map[label]
+                    display = info['display']
+                    url = info['url']
+                    return f'<a href="{url}" class="lemma-ref">{display}</a>'
+                return f'<span class="lemma-ref lemma-ref-missing">{label}?</span>'
+
+            content = re.sub(
+                r'<lemma-(thm|eq|def|lem|cor)-ref\s+label="?([^">]+)"?>([^<]*)</\1-ref>',
+                replace_label_ref_from_tag, content)
+
+            # Also handle the simpler [[thm:label]] / [[eq:label]] pattern directly
+            # (catch any that weren't processed by the markdown extension)
             def replace_label_ref(m: re.Match) -> str:
                 kind = m.group(1)
                 label = m.group(2)
@@ -133,14 +151,8 @@ class LemmaResolver:
                     display = info['display']
                     url = info['url']
                     return f'<a href="{url}" class="lemma-ref">{display}</a>'
-                return f'<span class="lemma-ref lemma-ref-missing">{kind}:{label}?</span>'
+                return f'<span class="lemma-ref lemma-ref-missing">{label}?</span>'
 
-            content = re.sub(r'<(lemma-thm-ref|lemma-eq-ref|lemma-def-ref|lemma-lem-ref|lemma-cor-ref)\s+label="([^"]+)">([^<]*)</\1>',
-                            lambda m: replace_label_ref(re.match(r'(thm|eq|def|lem|cor)', m.group(1))),
-                            content)
-
-            # Also handle the simpler [[thm:label]] / [[eq:label]] pattern directly
-            # (catch any that weren't processed by the markdown extension)
             content = re.sub(
                 r'\[\[(thm|eq|def|lem|cor):([a-zA-Z0-9_-]+)\]\]',
                 replace_label_ref, content)

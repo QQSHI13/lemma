@@ -1,0 +1,56 @@
+/* Lemma math wiki — custom admonition styling */
+.admonition.theorem {
+  border-color: #e74c3c;
+  border-left: 4px solid #e74c3c;
+}
+.admonition.theorem > .admonition-title {
+  background: #fdf2f2;
+  color: #c0392b;
+}
+.admonition.theorem > .admonition-title::before {
+  color: #e74c3c;
+  content: "\f0a9";
+}
+
+.admonition.proof {
+  border-color: #95a5a6;
+  border-left: 4px solid #95a5a6;
+}
+.admonition.proof > .admonition-title {
+  background: #f8f9fa;
+  color: #7f8c8d;
+}
+
+.admonition.definition {
+  border-color: #2ecc71;
+  border-left: 4px solid #2ecc71;
+}
+.admonition.definition > .admonition-title {
+  background: #f0faf4;
+  color: #27ae60;
+}
+
+.admonition.lemma {
+  border-color: #3498db;
+  border-left: 4px solid #3498db;
+}
+.admonition.lemma > .admonition-title {
+  background: #f0f7ff;
+  color: #2980b9;
+}
+
+.admonition.corollary {
+  border-color: #9b59b6;
+  border-left: 4px solid #9b59b6;
+}
+.admonition.corollary > .admonition-title {
+  background: #f5f0fa;
+  color: #8e44ad;
+}
+
+/* Lemma ref links */
+a.lemma-ref { font-weight: 500; }
+a.lemma-ref-missing { color: #e74c3c; text-decoration: dashed underline; }
+
+/* KaTeX display math with bounding box for visibility */
+.arithmatex { overflow-x: auto; overflow-y: hidden; }

@@ -4,19 +4,17 @@ The fundamental theorem of calculus links the concept of differentiation with th
 
 ## Statement
 
-:::theorem {#thm:ftc1}
-If $f$ is continuous on $[a,b]$ and $F$ is an antiderivative of $f$, then:
+!!! theorem "Fundamental Theorem of Calculus (Part 1)" {#thm:ftc1}
+    If $f$ is continuous on $[a,b]$ and $F$ is an antiderivative of $f$, then:
 
-$$ \int_a^b f(x) , dx = F(b) - F(a) $$
-:::
+    $$ \int_a^b f(x) , dx = F(b) - F(a) $$
 
-:::theorem {#thm:ftc2}
-If $f$ is continuous on $[a,b]$, then the function $g$ defined by:
+!!! theorem "Fundamental Theorem of Calculus (Part 2)" {#thm:ftc2}
+    If $f$ is continuous on $[a,b]$, then the function $g$ defined by:
 
-$$ g(x) = \int_a^x f(t) , dt $$
+    $$ g(x) = \int_a^x f(t) , dt $$
 
-is continuous on $[a,b]$ and differentiable on $(a,b)$, with $g'(x) = f(x)$.
-:::
+    is continuous on $[a,b]$ and differentiable on $(a,b)$, with $g'(x) = f(x)$.
 
 ## Proof
 

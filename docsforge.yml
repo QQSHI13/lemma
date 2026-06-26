@@ -39,12 +39,16 @@ theme:
 
 tikz: true
 
+extra_css:
+  - assets/css/lemma.css
+
 # Lemma custom markdown extension
 # Adds [[ref:Page Title]], [[thm:label]], [[eq:label]], {#thm:label} syntax
 markdown_extensions:
   - plugins.lemma_md
   - pymdownx.arithmatex:
       generic: true
+  - admonition
   - pymdownx.details
   - pymdownx.superfences
   - pymdownx.tabbed
@@ -104,3 +108,4 @@ nav:
 extra:
   lemma:
     enabled: true
+# Theme overrides for Lemma
