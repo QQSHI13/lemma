@@ -1,10 +1,10 @@
-site_name: Lemmas
+site_name: Lemma
 site_url: https://lemmas.pages.dev
 site_description: A rigorous mathematical wiki. Every definition is precise. Every theorem is proved.
 site_author: QQ (Cyrus)
 
-repo_name: QQSHI13/lemmas
-repo_url: https://github.com/QQSHI13/lemmas
+repo_name: QQSHI13/lemma
+repo_url: https://github.com/QQSHI13/lemma
 
 copyright: Copyright &copy; 2026 QQ (Cyrus)
 
