@@ -22,15 +22,13 @@ theme:
     - search.suggest
     - toc.follow
   palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
+    - scheme: default
       primary: teal
       accent: teal
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
+    - scheme: slate
       primary: black
       accent: teal
       toggle:
@@ -38,6 +36,9 @@ theme:
         name: Switch to light mode
 
 tikz: true
+
+extra_javascript:
+  - assets/js/theme.js
 
 extra_css:
   - assets/css/lemma.css
