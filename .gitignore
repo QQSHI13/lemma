@@ -218,3 +218,9 @@ __marimo__/
 .streamlit/secrets.toml
 site
 .docsforge
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
