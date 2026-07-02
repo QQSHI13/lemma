@@ -105,6 +105,12 @@ nav:
   - Probability:
     - probability/index.md
 
+plugins:
+  - search
+  - plugins.backlinks:
+      heading: "Backlinks"
+      empty_message: "No other pages link here yet."
+
 extra:
   lemma:
     enabled: true
