@@ -68,48 +68,11 @@ markdown_extensions:
 - attr_list
 - md_in_html
 - meta
-nav:
-- Home: index.md
-- Foundations:
-  - foundations/index.md
-  - Cartesian Product: foundations/cartesian-product.md
-  - Complement: foundations/complement.md
-  - Direct Proof: foundations/direct-proof.md
-  - Element: foundations/element.md
-  - Equivalence Relation: foundations/equivalence-relation.md
-  - Function: foundations/function.md
-  - Injection (One-to-One Function): foundations/injection.md
-  - Intersection: foundations/intersection.md
-  - Logical Connective: foundations/logical-connective.md
-  - Proof by Contradiction: foundations/proof-by-contradiction.md
-  - Proposition: foundations/proposition.md
-  - Quantifier: foundations/quantifier.md
-  - Relation: foundations/relation.md
-  - Set: foundations/set.md
-  - Subset: foundations/subset.md
-  - Surjection (Onto Function): foundations/surjection.md
-  - Truth Table: foundations/truth-table.md
-  - Union: foundations/union.md
-- Number Systems:
-  - number-systems/index.md
-- Algebra:
-  - algebra/index.md
-- Analysis:
-  - analysis/index.md
-- Geometry:
-  - geometry/index.md
-  - Pythagorean Theorem: geometry/pythagorean.md
-- Number Theory:
-  - number-theory/index.md
-- Discrete Mathematics:
-  - discrete-mathematics/index.md
-- Calculus:
-  - calculus/index.md
-  - Fundamental Theorem: calculus/fundamental-theorem.md
-- Probability:
-  - probability/index.md
+
 hooks:
-- /home/qq/.openclaw/workspace/projects/lemma/plugins/backlinks_hook.py
+- plugins/auto_nav_hook.py
+- plugins/prerequisites_hook.py
+- plugins/backlinks_hook.py
 extra:
   lemma:
     enabled: true

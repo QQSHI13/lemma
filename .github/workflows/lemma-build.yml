@@ -31,9 +31,6 @@ jobs:
           pip install pyyaml
           pip install docsforge
 
-      - name: Generate nav
-        run: python scripts/generate_nav.py
-
       - name: Validate links and frontmatter
         run: python scripts/check_links.py
 
