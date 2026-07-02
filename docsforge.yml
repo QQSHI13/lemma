@@ -114,7 +114,6 @@ nav:
 
 hooks:
   - /home/qq/.openclaw/workspace/projects/lemma/plugins/backlinks_hook.py
-  - /home/qq/.openclaw/workspace/projects/lemma/plugins/test_hook.py
 
 extra:
   lemma:

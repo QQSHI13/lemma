@@ -5,8 +5,6 @@ import posixpath
 import re
 from urllib.parse import unquote
 
-print("[backlinks] TOP OF MODULE")
-
 _backlinks_cache: dict[str, list] = {}
 _doc_uris: set[str] = set()
 
