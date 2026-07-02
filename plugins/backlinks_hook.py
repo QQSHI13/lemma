@@ -72,7 +72,10 @@ def on_page_markdown(markdown, *, page, config, files):
         src_uri = page.file.src_uri
         backlinks = _backlinks_cache.get(src_uri, [])
 
-        lines = ['> **Backlinks**', '> ']
+        # Build folded admonition
+        lines = ['??? note "Backlinks"']
+        lines.append('')
+
         if backlinks:
             seen = set()
             for source_file, source_title in backlinks:
@@ -81,9 +84,11 @@ def on_page_markdown(markdown, *, page, config, files):
                 seen.add(source_file.src_uri)
                 rel_url = source_file.url_relative_to(page.file)
                 safe_title = source_title.replace(']', '\\]').replace('[', '\\[')
-                lines.append(f'> - [{safe_title}]({rel_url})')
+                lines.append(f'    - [{safe_title}]({rel_url})')
         else:
-            lines.append('> *No other pages link here yet.*')
+            lines.append('    *No other pages link here yet.*')
+
+        lines.append('')
 
         return markdown + '\n\n' + '\n'.join(lines) + '\n'
     except Exception as e:
