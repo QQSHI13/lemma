@@ -237,6 +237,26 @@ class LemmaResolver:
                 content = content.replace('</article>', backlinks_html + '\n</article>')
                 html_path.write_text(content, encoding='utf-8')
 
+    def inject_copyright(self) -> None:
+        """Inject CC BY-SA 4.0 copyright footer at bottom of each page."""
+        footer_html = (
+            '<footer class="lemma-copyright" style="margin-top: 2rem; padding-top: 1rem; '
+            'border-top: 1px solid #e0e0e0; font-size: 0.85rem; color: #666; text-align: center;">'
+            '© 2026 <a href="https://github.com/QQSHI13">QQ (Cyrus)</a>. '
+            'This work is licensed under '
+            '<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.'
+            '</footer>'
+        )
+        for html_path in self.site_dir.rglob('*.html'):
+            if html_path.name == '404.html':
+                continue
+            content = html_path.read_text(encoding='utf-8')
+            # Only inject if not already present
+            if 'lemma-copyright' not in content:
+                # Insert before closing </body> tag
+                content = content.replace('</body>', footer_html + '\n</body>')
+                html_path.write_text(content, encoding='utf-8')
+
     def run(self) -> dict:
         """Run the full resolution pipeline."""
         log.info("Building page index...")
@@ -264,6 +284,9 @@ class LemmaResolver:
 
         log.info("Injecting backlinks...")
         self.inject_backlinks()
+
+        log.info("Injecting copyright footer...")
+        self.inject_copyright()
 
         result = {
             'pages': len(self.title_map),

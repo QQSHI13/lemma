@@ -1,4 +1,15 @@
 ---
+title: Pythagorean Theorem
+area: geometry
+difficulty: 2
+prerequisites:
+  - triangle
+  - similarity
+  - square
+related:
+  - distance-formula
+  - law-of-cosines
+  - trigonometric-functions
 tags:
   - geometry
   - theorem

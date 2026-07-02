@@ -1,3 +1,20 @@
+---
+title: Set
+area: foundations
+difficulty: 1
+prerequisites:
+  - element
+  - subset
+related:
+  - union
+  - intersection
+  - complement
+  - cartesian-product
+tags:
+  - foundations
+  - definition
+---
+
 # Set
 
 ## Definition
