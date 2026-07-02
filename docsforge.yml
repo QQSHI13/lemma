@@ -1,10 +1,11 @@
 site_name: Lemma
-site_url: https://lemmas.pages.dev
+site_url: https://lemmas.pages.dev/
 site_description: A rigorous mathematical wiki. Every definition is precise. Every theorem is proved.
 site_author: QQ
 
 repo_name: QQSHI13/lemma
 repo_url: https://github.com/QQSHI13/lemma
+edit_uri: edit/main/docs/
 
 copyright: Copyright © 2025–2026 QQ. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
 
@@ -104,9 +105,6 @@ nav:
     - discrete-mathematics/index.md
   - Probability:
     - probability/index.md
-
-plugins:
-  - search
 
 hooks:
   - plugins/backlinks_hook.py
