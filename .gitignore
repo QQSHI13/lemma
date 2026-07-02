@@ -225,4 +225,6 @@ site
 !.dev.vars.example
 !.env.example
 site/
-concepts.json
+
+# docsforge
+.docsforge

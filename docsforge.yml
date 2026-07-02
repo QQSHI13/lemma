@@ -1,121 +1,115 @@
 site_name: Lemma
 site_url: https://lemmas.pages.dev/
-site_description: A rigorous mathematical wiki. Every definition is precise. Every theorem is proved.
+site_description: A rigorous mathematical wiki. Every definition is precise. Every
+  theorem is proved.
 site_author: QQ
-
 repo_name: QQSHI13/lemma
 repo_url: https://github.com/QQSHI13/lemma
 edit_uri: edit/main/docs/
-
-copyright: Copyright © 2025–2026 QQ. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
-
+copyright: Copyright © 2025–2026 QQ. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC
+  BY-SA 4.0</a>.
 theme:
   name: material
   favicon: assets/images/favicon.svg
   icon:
     logo: fontawesome/solid/graduation-cap
   features:
-    - navigation.tabs
-    - navigation.sections
-    - navigation.top
-    - search.highlight
-    - search.share
-    - search.suggest
-    - toc.follow
+  - navigation.tabs
+  - navigation.sections
+  - navigation.top
+  - search.highlight
+  - search.share
+  - search.suggest
+  - toc.follow
   palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: teal
-      accent: teal
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: black
-      accent: teal
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
-
+  - media: '(prefers-color-scheme: light)'
+    scheme: default
+    primary: teal
+    accent: teal
+    toggle:
+      icon: material/brightness-7
+      name: Switch to dark mode
+  - media: '(prefers-color-scheme: dark)'
+    scheme: slate
+    primary: black
+    accent: teal
+    toggle:
+      icon: material/brightness-4
+      name: Switch to light mode
 tikz: true
-
 extra_css:
-  - assets/css/lemma.css
-
-# Lemma custom markdown extension
-# Adds [[ref:Page Title]], [[thm:label]], [[eq:label]], {#thm:label} syntax
+- assets/css/lemma.css
 markdown_extensions:
-  - plugins.lemma_md
-  - pymdownx.arithmatex:
-      generic: true
-  - admonition
-  - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.tabbed
-  - pymdownx.critic
-  - pymdownx.magiclink
-  - pymdownx.keys
-  - pymdownx.mark
-  - pymdownx.tilde
-  - pymdownx.tasklist
-  - pymdownx.betterem
-  - pymdownx.caret
-  - pymdownx.smartsymbols
-  - pymdownx.emoji
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.pathconverter
-  - pymdownx.b64
-  - pymdownx.blocks.caption
-  - footnotes
-  - def_list
-  - abbr
-  - attr_list
-  - md_in_html
-  - meta
-
+- plugins.lemma_md
+- pymdownx.arithmatex:
+    generic: true
+- admonition
+- pymdownx.details
+- pymdownx.superfences
+- pymdownx.tabbed
+- pymdownx.critic
+- pymdownx.magiclink
+- pymdownx.keys
+- pymdownx.mark
+- pymdownx.tilde
+- pymdownx.tasklist
+- pymdownx.betterem
+- pymdownx.caret
+- pymdownx.smartsymbols
+- pymdownx.emoji
+- pymdownx.inlinehilite
+- pymdownx.snippets
+- pymdownx.pathconverter
+- pymdownx.b64
+- pymdownx.blocks.caption
+- footnotes
+- def_list
+- abbr
+- attr_list
+- md_in_html
+- meta
 nav:
-  - Home: index.md
-  - Foundations:
-    - foundations/index.md
-    - Proposition: foundations/proposition.md
-    - Set: foundations/set.md
-    - Element: foundations/element.md
-    - Subset: foundations/subset.md
-    - Union: foundations/union.md
-    - Intersection: foundations/intersection.md
-    - Logical Connective: foundations/logical-connective.md
-    - Truth Table: foundations/truth-table.md
-    - Quantifier: foundations/quantifier.md
-    - Complement: foundations/complement.md
-    - Cartesian Product: foundations/cartesian-product.md
-    - Function: foundations/function.md
-    - Direct Proof: foundations/direct-proof.md
-    - Proof by Contradiction: foundations/proof-by-contradiction.md
-  - Number Systems:
-    - number-systems/index.md
-  - Algebra:
-    - algebra/index.md
-  - Analysis:
-    - analysis/index.md
-  - Geometry:
-    - geometry/index.md
-    - Pythagorean Theorem: geometry/pythagorean.md
-  - Number Theory:
-    - number-theory/index.md
-  - Calculus:
-    - calculus/index.md
-    - Fundamental Theorem: calculus/fundamental-theorem.md
-  - Discrete Math:
-    - discrete-mathematics/index.md
-  - Probability:
-    - probability/index.md
-
+- Home: index.md
+- Foundations:
+  - foundations/index.md
+  - Cartesian Product: foundations/cartesian-product.md
+  - Complement: foundations/complement.md
+  - Direct Proof: foundations/direct-proof.md
+  - Element: foundations/element.md
+  - Equivalence Relation: foundations/equivalence-relation.md
+  - Function: foundations/function.md
+  - Injection (One-to-One Function): foundations/injection.md
+  - Intersection: foundations/intersection.md
+  - Logical Connective: foundations/logical-connective.md
+  - Proof by Contradiction: foundations/proof-by-contradiction.md
+  - Proposition: foundations/proposition.md
+  - Quantifier: foundations/quantifier.md
+  - Relation: foundations/relation.md
+  - Set: foundations/set.md
+  - Subset: foundations/subset.md
+  - Surjection (Onto Function): foundations/surjection.md
+  - Truth Table: foundations/truth-table.md
+  - Union: foundations/union.md
+- Number Systems:
+  - number-systems/index.md
+- Algebra:
+  - algebra/index.md
+- Analysis:
+  - analysis/index.md
+- Geometry:
+  - geometry/index.md
+  - Pythagorean Theorem: geometry/pythagorean.md
+- Number Theory:
+  - number-theory/index.md
+- Discrete Mathematics:
+  - discrete-mathematics/index.md
+- Calculus:
+  - calculus/index.md
+  - Fundamental Theorem: calculus/fundamental-theorem.md
+- Probability:
+  - probability/index.md
 hooks:
-  - /home/qq/.openclaw/workspace/projects/lemma/plugins/backlinks_hook.py
-
+- /home/qq/.openclaw/workspace/projects/lemma/plugins/backlinks_hook.py
 extra:
   lemma:
     enabled: true
-# Theme overrides for Lemma
