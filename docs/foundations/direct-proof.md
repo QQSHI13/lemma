@@ -95,6 +95,8 @@ In such cases, consider:
 - [Proof by Contradiction](proof-by-contradiction.md)
 - [Proof by Contrapositive](proof-by-contrapositive.md)
 - [Proof by Induction](proof-by-induction.md)
+- [Truth Table](truth-table.md) — For analyzing logical validity
+- [Quantifier](quantifier.md) — For formalizing statements with FOR ALL and EXISTS
 
 ## Related
 

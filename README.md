@@ -25,4 +25,4 @@ docsforge build
 
 ## License
 
-LGPL-3.0
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) — Share alike, give credit.

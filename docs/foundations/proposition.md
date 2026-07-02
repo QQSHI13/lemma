@@ -64,3 +64,6 @@ This is a proposition, but its truth value is currently **unknown**. It is eithe
 
 - [[ref:Logical Connective]] — How to combine propositions
 - [[ref:Direct Proof]] — How to prove propositions
+- [Truth Table](truth-table.md) — Analyzing all truth values
+- [Quantifier](quantifier.md) — Extending with FOR ALL and EXISTS
+- [Proof by Contradiction](proof-by-contradiction.md) — Proving via negation

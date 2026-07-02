@@ -1,26 +1,17 @@
-"""Single-file hook plugin — no packaging required.
-
-Drop this in your docs_dir and reference it in docsforge.yml:
-
-    hooks:
-      - plugins/backlinks_hook.py
-
-Injects a "> **Backlinks**" quote block at the end of every page that has
-incoming links from other local markdown files.
-"""
+"""Backlinks plugin for DocsForge - injects backlink quotes."""
 from __future__ import annotations
 
 import posixpath
 import re
 from urllib.parse import unquote
 
-# Module-level cache built during the first call and reused across pages
+print("[backlinks] TOP OF MODULE")
+
 _backlinks_cache: dict[str, list] = {}
 _doc_uris: set[str] = set()
 
 
 def _resolve_link(link_path: str, from_src_uri: str) -> str | None:
-    """Resolve a markdown link to a src_uri."""
     link_path = unquote(link_path).strip()
     if link_path.startswith('/'):
         target = link_path.lstrip('/')
@@ -37,8 +28,20 @@ def _resolve_link(link_path: str, from_src_uri: str) -> str | None:
     return target
 
 
+def _extract_title(content: str) -> str:
+    if content.startswith('---'):
+        fm_match = re.search(r'^---\s*\n(.*?)\n---', content, re.DOTALL)
+        if fm_match:
+            title_match = re.search(r'^title:\s*(.+)$', fm_match.group(1), re.MULTILINE)
+            if title_match:
+                return title_match.group(1).strip().strip('"\'')
+    h1_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
+    if h1_match:
+        return h1_match.group(1).strip()
+    return "Untitled"
+
+
 def on_files(files, *, config):
-    """Build backlink map from all documentation pages."""
     global _backlinks_cache, _doc_uris
     _backlinks_cache.clear()
     _doc_uris = {f.src_uri for f in files.documentation_pages()}
@@ -46,39 +49,47 @@ def on_files(files, *, config):
 
     for file in files.documentation_pages():
         content = file.content_string
-        if content.startswith('---'):
-            parts = content.split('---', 2)
+        title = _extract_title(content)
+        body = content
+        if body.startswith('---'):
+            parts = body.split('---', 2)
             if len(parts) >= 3:
-                content = parts[2]
-        for match in link_pattern.finditer(content):
-            text = match.group(1)
+                body = parts[2]
+        for match in link_pattern.finditer(body):
             path = match.group(2).strip()
-            if not path or path.startswith(('#', 'http://', 'https://', 'mailto:')):
+            if not path or path.startswith(('#', 'http://', 'https://', 'mailto:',
+                                            'ftp://', 'data:', 'javascript:')):
                 continue
             clean = path.split('#')[0].split('?')[0]
             if not clean:
                 continue
             target = _resolve_link(clean, file.src_uri)
             if target and target in _doc_uris:
-                _backlinks_cache.setdefault(target, []).append((file, text))
+                _backlinks_cache.setdefault(target, []).append((file, title))
     return files
 
 
 def on_page_markdown(markdown, *, page, config, files):
-    """Append backlink quote block to page."""
-    src_uri = page.file.src_uri
-    backlinks = _backlinks_cache.get(src_uri, [])
-    if not backlinks:
+    try:
+        src_uri = page.file.src_uri
+        backlinks = _backlinks_cache.get(src_uri, [])
+
+        lines = ['> **Backlinks**', '> ']
+        if backlinks:
+            seen = set()
+            for source_file, source_title in backlinks:
+                if source_file.src_uri in seen:
+                    continue
+                seen.add(source_file.src_uri)
+                rel_url = source_file.url_relative_to(page.file)
+                safe_title = source_title.replace(']', '\\]').replace('[', '\\[')
+                lines.append(f'> - [{safe_title}]({rel_url})')
+        else:
+            lines.append('> *No other pages link here yet.*')
+
+        return markdown + '\n\n' + '\n'.join(lines) + '\n'
+    except Exception as e:
+        import traceback
+        print(f"[backlinks] ERROR in on_page_markdown: {e}")
+        traceback.print_exc()
         return markdown
-
-    lines = ['> **Backlinks**', '> ']
-    seen = set()
-    for source_file, link_text in backlinks:
-        if source_file.src_uri in seen:
-            continue
-        seen.add(source_file.src_uri)
-        rel_url = source_file.url_relative_to(page.file)
-        safe_text = link_text.replace(']', '\\]').replace('[', '\\[')
-        lines.append(f'> - [{safe_text}]({rel_url})')
-
-    return markdown + '\n\n' + '\n'.join(lines) + '\n'
