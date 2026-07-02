@@ -285,9 +285,6 @@ class LemmaResolver:
         log.info("Injecting backlinks...")
         self.inject_backlinks()
 
-        log.info("Injecting copyright footer...")
-        self.inject_copyright()
-
         result = {
             'pages': len(self.title_map),
             'references': all_refs,
