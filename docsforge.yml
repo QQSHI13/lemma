@@ -1,7 +1,7 @@
 site_name: Lemma
 site_url: https://lemmas.pages.dev
 site_description: A rigorous mathematical wiki. Every definition is precise. Every theorem is proved.
-site_author: QQ (Cyrus)
+site_author: QQ
 
 repo_name: QQSHI13/lemma
 repo_url: https://github.com/QQSHI13/lemma
@@ -107,9 +107,9 @@ nav:
 
 plugins:
   - search
-  - plugins.backlinks:
-      heading: "Backlinks"
-      empty_message: "No other pages link here yet."
+
+hooks:
+  - plugins/backlinks_hook.py
 
 extra:
   lemma:
