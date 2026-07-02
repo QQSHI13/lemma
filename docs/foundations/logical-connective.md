@@ -1,3 +1,18 @@
+---
+title: Logical Connective
+area: foundations
+difficulty: 1
+prerequisites:
+  - proposition
+  - truth-table
+  - quantifier
+related:
+
+tags:
+  - foundations
+  - definition
+---
+
 # Logical Connective
 
 ## Definition

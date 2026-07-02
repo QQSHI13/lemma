@@ -1,3 +1,18 @@
+---
+title: Intersection
+area: foundations
+difficulty: 1
+prerequisites:
+  - set
+  - union
+  - complement
+related:
+
+tags:
+  - foundations
+  - definition
+---
+
 # Intersection
 
 ## Definition

@@ -1,3 +1,12 @@
+---
+title: Probability
+area: probability
+difficulty: 1
+tags:
+  - probability
+  - index
+---
+
 # Probability
 
 The study of randomness and uncertainty.

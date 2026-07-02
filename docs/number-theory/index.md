@@ -1,3 +1,12 @@
+---
+title: Number Theory
+area: number-theory
+difficulty: 1
+tags:
+  - number-theory
+  - index
+---
+
 # Number Theory
 
 The study of integers and their properties.

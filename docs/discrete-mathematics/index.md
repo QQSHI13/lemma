@@ -1,3 +1,12 @@
+---
+title: Discrete Mathematics
+area: discrete-mathematics
+difficulty: 1
+tags:
+  - discrete-mathematics
+  - index
+---
+
 # Discrete Mathematics
 
 The study of discrete (non-continuous) structures.

@@ -1,3 +1,18 @@
+---
+title: Subset
+area: foundations
+difficulty: 1
+prerequisites:
+  - set
+  - union
+  - intersection
+related:
+  - complement
+tags:
+  - foundations
+  - definition
+---
+
 # Subset
 
 ## Definition

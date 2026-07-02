@@ -1,3 +1,18 @@
+---
+title: Proposition
+area: foundations
+difficulty: 1
+prerequisites:
+  - truth-table
+  - quantifier
+  - proof-by-contradiction
+related:
+
+tags:
+  - foundations
+  - definition
+---
+
 # Proposition
 
 ## Definition

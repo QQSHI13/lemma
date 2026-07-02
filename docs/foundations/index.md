@@ -1,3 +1,12 @@
+---
+title: Foundations
+area: foundations
+difficulty: 1
+tags:
+  - foundations
+  - index
+---
+
 # Foundations
 
 The building blocks of mathematics.

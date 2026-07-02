@@ -1,3 +1,12 @@
+---
+title: Algebra
+area: algebra
+difficulty: 1
+tags:
+  - algebra
+  - index
+---
+
 # Algebra
 
 The study of mathematical structures and their operations.

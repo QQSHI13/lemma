@@ -1,3 +1,17 @@
+---
+title: Element
+area: foundations
+difficulty: 1
+prerequisites:
+  - set
+  - subset
+related:
+
+tags:
+  - foundations
+  - definition
+---
+
 # Element
 
 ## Definition

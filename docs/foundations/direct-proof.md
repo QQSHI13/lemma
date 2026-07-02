@@ -1,3 +1,20 @@
+---
+title: Direct Proof
+area: foundations
+difficulty: 1
+prerequisites:
+  - proof-by-contradiction
+  - proof-by-contrapositive
+  - proof-by-induction
+related:
+  - truth-table
+  - quantifier
+  - proposition
+tags:
+  - foundations
+  - definition
+---
+
 # Direct Proof
 
 ## Definition

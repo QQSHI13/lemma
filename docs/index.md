@@ -1,3 +1,12 @@
+---
+title: Lemma
+area: home
+difficulty: 1
+tags:
+  - home
+  - index
+---
+
 # Lemma
 
 A rigorous mathematical wiki. Every definition is precise. Every theorem is proved.

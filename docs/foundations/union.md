@@ -1,3 +1,18 @@
+---
+title: Union
+area: foundations
+difficulty: 1
+prerequisites:
+  - set
+  - intersection
+  - complement
+related:
+
+tags:
+  - foundations
+  - definition
+---
+
 # Union
 
 ## Definition

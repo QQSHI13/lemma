@@ -1,3 +1,12 @@
+---
+title: Number Systems
+area: number-systems
+difficulty: 1
+tags:
+  - number-systems
+  - index
+---
+
 # Number Systems
 
 How we build numbers from the ground up.

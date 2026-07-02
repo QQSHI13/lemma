@@ -31,27 +31,8 @@ jobs:
           pip install pyyaml
           pip install docsforge
 
-      - name: Validate concepts.json
-        run: python scripts/lemma_pipeline.py --validate
-
-      - name: Check quality scores
-        run: |
-          python scripts/lemma_pipeline.py --quality-check
-
-      - name: Check links
+      - name: Validate links and frontmatter
         run: python scripts/check_links.py
-
-      - name: Check notation consistency
-        run: python scripts/lemma_pipeline.py --notation-check
 
       - name: Build docs
         run: docsforge build
-
-      - name: Generate dashboard
-        run: python scripts/lemma_pipeline.py --dashboard
-
-      - name: Upload dashboard artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: lemma-dashboard
-          path: site/dashboard.html

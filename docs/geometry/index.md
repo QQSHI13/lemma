@@ -1,3 +1,12 @@
+---
+title: Geometry
+area: geometry
+difficulty: 1
+tags:
+  - geometry
+  - index
+---
+
 # Geometry
 
 The study of shape, size, and space.

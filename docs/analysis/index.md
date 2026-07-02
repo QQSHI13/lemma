@@ -1,3 +1,12 @@
+---
+title: Analysis
+area: analysis
+difficulty: 1
+tags:
+  - analysis
+  - index
+---
+
 # Analysis
 
 The study of limits, continuity, differentiation, and integration.

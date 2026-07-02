@@ -1,3 +1,17 @@
+---
+title: Fundamental Theorem
+area: calculus
+difficulty: 1
+prerequisites:
+
+related:
+
+tags:
+  - calculus
+  - theorem
+  - definition
+---
+
 # Fundamental Theorem of Calculus
 
 The fundamental theorem of calculus links the concept of differentiation with that of integration.
