@@ -38,11 +38,14 @@ jobs:
         run: |
           python scripts/lemma_pipeline.py --quality-check
 
-      - name: Check all links
+      - name: Check links
         run: python scripts/check_links.py
 
       - name: Check notation consistency
         run: python scripts/lemma_pipeline.py --notation-check
+
+      - name: Build docs
+        run: docsforge build
 
       - name: Generate dashboard
         run: python scripts/lemma_pipeline.py --dashboard

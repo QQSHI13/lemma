@@ -50,4 +50,4 @@ Since $x \in \emptyset$ is always false, the implication is vacuously true.
 - [Set](set.md)
 - [Union](union.md)
 - [Intersection](intersection.md)
-- [Power Set](power-set.md) — The set of all subsets
+- [Complement](complement.md) — Elements not in the subset
