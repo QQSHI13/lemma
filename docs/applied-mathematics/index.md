@@ -1,6 +1,7 @@
 ---
 title: Differential Equations & Applied Mathematics
 area: applied-mathematics
+difficulty: 1
 prerequisites:
   - calculus
   - analysis
