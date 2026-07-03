@@ -75,6 +75,13 @@ hooks:
 - plugins/prerequisites_hook.py
 - plugins/backlinks_hook.py
 extra:
+  alternate:
+    - name: English
+      link: /
+      lang: en
+    - name: 中文
+      link: /zh/
+      lang: zh
   lemma:
     enabled: true
     areas:

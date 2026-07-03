@@ -21,9 +21,11 @@ def on_config(config):
     lemma_extra = extra.get("lemma", {})
     area_order = lemma_extra.get("areas", [])
     
-    # Group pages by area
+    # Group pages by area (exclude Chinese pages from English nav)
     area_pages = {}
     for row in conn.execute("SELECT id, name, area, file_path FROM concepts ORDER BY name"):
+        if row["file_path"].startswith("zh/"):
+            continue  # Skip Chinese pages in English nav
         area = row["area"]
         if area not in area_pages:
             area_pages[area] = []
