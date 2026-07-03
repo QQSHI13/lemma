@@ -5,7 +5,7 @@ site_description: A rigorous mathematical wiki. Every definition is precise. Eve
 site_author: QQ
 repo_name: QQSHI13/lemma
 repo_url: https://github.com/QQSHI13/lemma
-edit_uri: edit/main/docs/
+edit_uri: https://lemmas.pages.dev/edit-landing/?ref=
 copyright: Copyright © 2025–2026 QQ. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC
   BY-SA 4.0</a>.
 theme:
