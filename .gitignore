@@ -228,3 +228,6 @@ site/
 
 # docsforge
 .docsforge
+
+# Generated artifacts
+concepts.json

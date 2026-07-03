@@ -1,10 +1,10 @@
-"""Auto-nav hook for DocsForge — generates nav from concepts.json + docs/ structure.
+"""Auto-nav hook for DocsForge — generates nav from docs/ frontmatter.
 
-Replaces manual nav editing in docsforge.yml. Place in hooks list before build.
+Reads frontmatter from all markdown files to build navigation.
+Areas defined in docsforge.yml or auto-detected from file paths.
 """
 from __future__ import annotations
 
-import json
 import re
 from pathlib import Path
 
@@ -25,23 +25,19 @@ def _read_frontmatter(content: str) -> dict:
 
 
 def on_config(config):
-    """Generate nav from concepts.json and docs/ file structure."""
-    # Resolve paths relative to config file
+    """Generate nav from docs/ file structure and frontmatter."""
     cfg_path = Path(config.config_file_path).resolve().parent
     docs_dir = cfg_path / "docs"
-    concepts_file = cfg_path / "concepts.json"
 
-    if not concepts_file.exists():
-        print("[auto_nav] concepts.json not found, skipping nav generation")
-        return config
-
-    # Load concepts.json
-    with open(concepts_file) as f:
-        data = json.load(f)
-
-    areas = {a["id"]: a for a in data.get("areas", [])}
-    area_order = {a["id"]: a.get("order", 99) for a in data.get("areas", [])}
-    concepts = {c["id"]: c for c in data.get("concepts", [])}
+    # Load area order from docsforge.yml if present, or auto-detect
+    area_order = {}
+    extra = config.get("extra", {})
+    lemma_extra = extra.get("lemma", {})
+    areas_config = lemma_extra.get("areas", [])
+    
+    if areas_config:
+        for i, area in enumerate(areas_config):
+            area_order[area] = i
 
     # Group pages by area
     area_pages: dict[str, list[tuple[str, str]]] = {}
@@ -62,24 +58,26 @@ def on_config(config):
             if len(parts) >= 2:
                 area = parts[0]
 
-        if area not in areas:
-            continue  # Skip unknown areas
+        if not area:
+            continue
 
         if not title:
-            stem = md_file.stem
-            title = concepts.get(stem, {}).get("name", stem.replace("-", " ").title())
+            title = md_file.stem.replace("-", " ").title()
 
         area_pages.setdefault(area, []).append((title, rel_str))
 
-    # Sort areas by order
-    sorted_areas = sorted(area_pages.keys(), key=lambda a: area_order.get(a, 99))
+    # Sort areas: configured order first, then alphabetically
+    def area_sort_key(a):
+        return (area_order.get(a, 999), a.lower())
+
+    sorted_areas = sorted(area_pages.keys(), key=area_sort_key)
 
     # Build nav
     nav = [{"Home": "index.md"}]
 
     for area_id in sorted_areas:
         pages = area_pages[area_id]
-        area_name = areas.get(area_id, {}).get("name", area_id.replace("-", " ").title())
+        area_name = area_id.replace("-", " ").title()
 
         # Sort: index first, then alphabetically
         def sort_key(item):

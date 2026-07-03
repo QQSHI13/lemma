@@ -70,9 +70,20 @@ markdown_extensions:
 - meta
 
 hooks:
+- plugins/build_concepts_hook.py
 - plugins/auto_nav_hook.py
 - plugins/prerequisites_hook.py
 - plugins/backlinks_hook.py
 extra:
   lemma:
     enabled: true
+    areas:
+    - foundations
+    - number-systems
+    - algebra
+    - analysis
+    - geometry
+    - number-theory
+    - discrete-mathematics
+    - calculus
+    - probability
