@@ -32,6 +32,8 @@ jobs:
           pip install docsforge
 
       - name: Build docs
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: docsforge build
 
       - name: Validate links and frontmatter
