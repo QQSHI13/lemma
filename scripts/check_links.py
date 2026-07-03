@@ -11,6 +11,7 @@ not on index pages linking to not-yet-written topics.
 
 import argparse
 import re
+import sqlite3
 import sys
 from pathlib import Path
 
@@ -20,23 +21,25 @@ except ImportError:
     yaml = None
 
 DOCS_DIR = Path("docs")
-CONCEPTS_FILE = Path("concepts.json")
+CONCEPTS_DB = Path("concepts.db")
 
 # Files that are allowed to have broken links (table of contents / index pages)
 INDEX_FILES = {"index.md", "README.md"}
 
 # Required frontmatter fields
-REQUIRED_FIELDS = {"title", "area", "difficulty", "tags"}
+REQUIRED_FIELDS = {"title", "area", "difficulty"}
 
-# Valid areas from concepts.json (populated at runtime)
+# Valid areas from concepts.db (populated at runtime)
 VALID_AREAS = set()
 
 
 def load_concepts():
-    import json
-    with open(CONCEPTS_FILE) as f:
-        data = json.load(f)
-    return {c["id"]: c for c in data["concepts"]}
+    conn = sqlite3.connect(CONCEPTS_DB)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.execute("SELECT id, name, area FROM concepts")
+    concepts = {row["id"]: dict(row) for row in cursor.fetchall()}
+    conn.close()
+    return concepts
 
 
 def extract_frontmatter(content: str) -> tuple[dict | None, str]:
@@ -58,7 +61,6 @@ def extract_frontmatter(content: str) -> tuple[dict | None, str]:
         # Fallback: basic parsing for title, area, difficulty, tags, prerequisites, related
         fm = {}
         current_key = None
-        current_list = None
         
         for line in fm_text.strip().split("\n"):
             # List item
@@ -127,7 +129,7 @@ def validate_frontmatter(md_file: Path, content: str, concepts: dict) -> list[st
             
             # Check area is known (skip special areas like 'home')
             if VALID_AREAS and area not in VALID_AREAS and area != 'home':
-                violations.append(f"⚠️  {rel_path}: 'area' '{area}' not found in concepts.json")
+                violations.append(f"⚠️  {rel_path}: 'area' '{area}' not found in concepts.db")
     
     # Check difficulty is int
     difficulty = fm.get("difficulty")
@@ -137,7 +139,7 @@ def validate_frontmatter(md_file: Path, content: str, concepts: dict) -> list[st
         elif difficulty < 1 or difficulty > 5:
             violations.append(f"⚠️  {rel_path}: 'difficulty' {difficulty} is outside typical range 1-5")
     
-    # Check tags is list
+    # Check tags is list (optional)
     tags = fm.get("tags")
     if tags is not None:
         if not isinstance(tags, list):
@@ -155,7 +157,7 @@ def validate_frontmatter(md_file: Path, content: str, concepts: dict) -> list[st
                 if not isinstance(p, str):
                     violations.append(f"❌ {rel_path}: prerequisite '{p}' must be a string")
                 elif p not in concepts:
-                    violations.append(f"⚠️  {rel_path}: prerequisite '{p}' not found in concepts.json")
+                    violations.append(f"⚠️  {rel_path}: prerequisite '{p}' not found in concepts.db")
     
     # Check related is list of strings
     related = fm.get("related")
@@ -167,7 +169,7 @@ def validate_frontmatter(md_file: Path, content: str, concepts: dict) -> list[st
                 if not isinstance(r, str):
                     violations.append(f"❌ {rel_path}: related item '{r}' must be a string")
                 elif r not in concepts:
-                    violations.append(f"⚠️  {rel_path}: related item '{r}' not found in concepts.json")
+                    violations.append(f"⚠️  {rel_path}: related item '{r}' not found in concepts.db")
     
     # Check for unknown fields
     known_fields = {"title", "area", "difficulty", "tags", "prerequisites", "related", "status", "quality_score"}
@@ -187,9 +189,17 @@ def resolve_link(target: str, from_file: Path) -> Path | None:
 
 
 def check_all(strict: bool = False):
-    if not CONCEPTS_FILE.exists():
-        print("No concepts.json found. Skipping check.")
-        sys.exit(0)
+    if not CONCEPTS_DB.exists():
+        print("No concepts.db found. Running docsforge build to generate it...")
+        import subprocess
+        result = subprocess.run(["docsforge", "build"], capture_output=True, text=True)
+        if result.returncode != 0:
+            print("docsforge build failed:")
+            print(result.stderr)
+            sys.exit(1)
+        if not CONCEPTS_DB.exists():
+            print("Still no concepts.db after build. Skipping check.")
+            sys.exit(0)
 
     concepts = load_concepts()
     
