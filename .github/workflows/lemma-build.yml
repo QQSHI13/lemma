@@ -31,8 +31,8 @@ jobs:
           pip install pyyaml
           pip install docsforge
 
-      - name: Validate links and frontmatter
-        run: python scripts/check_links.py
-
       - name: Build docs
         run: docsforge build
+
+      - name: Validate links and frontmatter
+        run: python scripts/check_links.py

@@ -195,6 +195,7 @@ def check_all(strict: bool = False):
         result = subprocess.run(["docsforge", "build"], capture_output=True, text=True)
         if result.returncode != 0:
             print("docsforge build failed:")
+            print(result.stdout)
             print(result.stderr)
             sys.exit(1)
         if not CONCEPTS_DB.exists():
