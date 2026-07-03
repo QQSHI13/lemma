@@ -230,4 +230,4 @@ site/
 .docsforge
 
 # Generated artifacts
-concepts.json
+concepts.db

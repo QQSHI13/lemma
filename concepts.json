@@ -1,0 +1,500 @@
+{
+  "version": "1.0.0",
+  "bootstrap_concepts": [
+    "fundamental-theorem"
+  ],
+  "concepts": [
+    {
+      "id": "fundamental-theorem",
+      "name": "Fundamental Theorem",
+      "area": "calculus",
+      "prerequisites": [],
+      "unlocks": [],
+      "related": [],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 1
+    },
+    {
+      "id": "pythagorean",
+      "name": "Pythagorean Theorem",
+      "area": "geometry",
+      "prerequisites": [
+        "triangle",
+        "similarity",
+        "square"
+      ],
+      "unlocks": [],
+      "related": [
+        "distance-formula",
+        "law-of-cosines",
+        "trigonometric-functions"
+      ],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 2
+    },
+    {
+      "id": "surjection",
+      "name": "Surjection (Onto Function)",
+      "area": "foundations",
+      "prerequisites": [
+        "function",
+        "set",
+        "element"
+      ],
+      "unlocks": [],
+      "related": [
+        "injection",
+        "bijection",
+        "composition",
+        "inverse"
+      ],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 2
+    },
+    {
+      "id": "direct-proof",
+      "name": "Direct Proof",
+      "area": "foundations",
+      "prerequisites": [
+        "proof-by-contradiction",
+        "proof-by-contrapositive",
+        "proof-by-induction"
+      ],
+      "unlocks": [
+        "proof-by-contradiction"
+      ],
+      "related": [
+        "truth-table",
+        "quantifier",
+        "proposition"
+      ],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 1
+    },
+    {
+      "id": "logical-connective",
+      "name": "Logical Connective",
+      "area": "foundations",
+      "prerequisites": [
+        "proposition",
+        "truth-table",
+        "quantifier"
+      ],
+      "unlocks": [
+        "truth-table",
+        "proof-by-contradiction"
+      ],
+      "related": [],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 1
+    },
+    {
+      "id": "injection",
+      "name": "Injection (One-to-One Function)",
+      "area": "foundations",
+      "prerequisites": [
+        "function",
+        "set",
+        "element"
+      ],
+      "unlocks": [],
+      "related": [
+        "surjection",
+        "bijection",
+        "composition",
+        "inverse"
+      ],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 2
+    },
+    {
+      "id": "subset",
+      "name": "Subset",
+      "area": "foundations",
+      "prerequisites": [
+        "set",
+        "union",
+        "intersection"
+      ],
+      "unlocks": [
+        "element",
+        "set"
+      ],
+      "related": [
+        "complement"
+      ],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 1
+    },
+    {
+      "id": "relation",
+      "name": "Relation",
+      "area": "foundations",
+      "prerequisites": [
+        "set",
+        "cartesian-product",
+        "element"
+      ],
+      "unlocks": [
+        "equivalence-relation",
+        "function"
+      ],
+      "related": [
+        "function",
+        "equivalence-relation",
+        "partial-order",
+        "binary-relation",
+        "reflexive",
+        "symmetric",
+        "transitive"
+      ],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 2
+    },
+    {
+      "id": "element",
+      "name": "Element",
+      "area": "foundations",
+      "prerequisites": [
+        "set",
+        "subset"
+      ],
+      "unlocks": [
+        "surjection",
+        "injection",
+        "relation",
+        "set",
+        "cartesian-product",
+        "complement"
+      ],
+      "related": [],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 1
+    },
+    {
+      "id": "intersection",
+      "name": "Intersection",
+      "area": "foundations",
+      "prerequisites": [
+        "set",
+        "union",
+        "complement"
+      ],
+      "unlocks": [
+        "subset",
+        "union"
+      ],
+      "related": [],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 1
+    },
+    {
+      "id": "truth-table",
+      "name": "Truth Table",
+      "area": "foundations",
+      "prerequisites": [
+        "proposition",
+        "logical-connective"
+      ],
+      "unlocks": [
+        "logical-connective",
+        "proposition"
+      ],
+      "related": [
+        "quantifier",
+        "boolean-algebra"
+      ],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 1
+    },
+    {
+      "id": "proof-by-contradiction",
+      "name": "Proof by Contradiction",
+      "area": "foundations",
+      "prerequisites": [
+        "proposition",
+        "logical-connective",
+        "direct-proof"
+      ],
+      "unlocks": [
+        "direct-proof",
+        "proposition"
+      ],
+      "related": [
+        "proof-by-contrapositive",
+        "proof-by-induction"
+      ],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 2
+    },
+    {
+      "id": "set",
+      "name": "Set",
+      "area": "foundations",
+      "prerequisites": [
+        "element",
+        "subset"
+      ],
+      "unlocks": [
+        "surjection",
+        "injection",
+        "subset",
+        "relation",
+        "element",
+        "intersection",
+        "cartesian-product",
+        "equivalence-relation",
+        "complement",
+        "function",
+        "union",
+        "quantifier"
+      ],
+      "related": [
+        "union",
+        "intersection",
+        "complement",
+        "cartesian-product"
+      ],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 1
+    },
+    {
+      "id": "cartesian-product",
+      "name": "Cartesian Product",
+      "area": "foundations",
+      "prerequisites": [
+        "set",
+        "element",
+        "ordered-pair"
+      ],
+      "unlocks": [
+        "relation",
+        "function"
+      ],
+      "related": [
+        "relation",
+        "function",
+        "tuple"
+      ],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 2
+    },
+    {
+      "id": "equivalence-relation",
+      "name": "Equivalence Relation",
+      "area": "foundations",
+      "prerequisites": [
+        "relation",
+        "set",
+        "reflexive",
+        "symmetric",
+        "transitive"
+      ],
+      "unlocks": [],
+      "related": [
+        "partition",
+        "quotient-set",
+        "congruence",
+        "isomorphism"
+      ],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 2
+    },
+    {
+      "id": "proposition",
+      "name": "Proposition",
+      "area": "foundations",
+      "prerequisites": [
+        "truth-table",
+        "quantifier",
+        "proof-by-contradiction"
+      ],
+      "unlocks": [
+        "logical-connective",
+        "truth-table",
+        "proof-by-contradiction",
+        "quantifier"
+      ],
+      "related": [],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 1
+    },
+    {
+      "id": "complement",
+      "name": "Complement",
+      "area": "foundations",
+      "prerequisites": [
+        "set",
+        "element"
+      ],
+      "unlocks": [
+        "intersection",
+        "union"
+      ],
+      "related": [
+        "union",
+        "intersection",
+        "subset"
+      ],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 1
+    },
+    {
+      "id": "function",
+      "name": "Function",
+      "area": "foundations",
+      "prerequisites": [
+        "set",
+        "cartesian-product",
+        "relation"
+      ],
+      "unlocks": [
+        "surjection",
+        "injection"
+      ],
+      "related": [
+        "injection",
+        "surjection",
+        "bijection",
+        "composition",
+        "inverse"
+      ],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 2
+    },
+    {
+      "id": "union",
+      "name": "Union",
+      "area": "foundations",
+      "prerequisites": [
+        "set",
+        "intersection",
+        "complement"
+      ],
+      "unlocks": [
+        "subset",
+        "intersection"
+      ],
+      "related": [],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 1
+    },
+    {
+      "id": "quantifier",
+      "name": "Quantifier",
+      "area": "foundations",
+      "prerequisites": [
+        "proposition",
+        "set"
+      ],
+      "unlocks": [
+        "logical-connective",
+        "proposition"
+      ],
+      "related": [
+        "predicate",
+        "truth-table"
+      ],
+      "status": "draft",
+      "author": null,
+      "quality_score": 0,
+      "page_exists": true,
+      "last_reviewed": null,
+      "difficulty": 1
+    }
+  ],
+  "areas": [
+    {
+      "id": "foundations",
+      "name": "Foundations",
+      "order": 1
+    },
+    {
+      "id": "geometry",
+      "name": "Geometry",
+      "order": 5
+    },
+    {
+      "id": "calculus",
+      "name": "Calculus",
+      "order": 8
+    }
+  ],
+  "notation_registry": {}
+}
