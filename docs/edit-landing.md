@@ -65,7 +65,7 @@ quality_score: 0            # auto-calculated, leave as 0
 
 <div id="start-edit-container" style="text-align: center; margin: 2rem 0;">
   <a id="start-edit-link" href="#" class="md-button md-button--primary" style="font-size: 1.2rem; padding: 0.8rem 1.5rem;">
-    :material-pencil: Start Editing on GitHub
+    ✏️ Start Editing on GitHub
   </a>
 </div>
 
@@ -74,9 +74,12 @@ quality_score: 0            # auto-calculated, leave as 0
   const params = new URLSearchParams(window.location.search);
   const ref = params.get('ref') || '';
   
+  // Strip leading slashes to prevent double slashes in GitHub URL
+  const cleanRef = ref.replace(/^\/+/,'');
+  
   // Build the GitHub edit URL
   const repoUrl = 'https://github.com/QQSHI13/lemma/edit/main/docs/';
-  const editUrl = repoUrl + ref;
+  const editUrl = repoUrl + cleanRef;
   
   // Update the link
   document.getElementById('start-edit-link').href = editUrl;
