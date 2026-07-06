@@ -21,6 +21,7 @@ theme:
   - search.share
   - search.suggest
   - toc.follow
+  - content.action.edit
   palette:
   - media: '(prefers-color-scheme: light)'
     scheme: default
@@ -39,6 +40,8 @@ theme:
 tikz: true
 extra_css:
 - assets/css/lemma.css
+extra_javascript:
+- assets/js/i18n-nav.js
 markdown_extensions:
 - plugins.lemma_md
 - pymdownx.arithmatex:

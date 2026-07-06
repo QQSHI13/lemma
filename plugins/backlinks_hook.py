@@ -70,6 +70,11 @@ def on_files(files, *, config):
 def on_page_markdown(markdown, *, page, config, files):
     try:
         src_uri = page.file.src_uri
+        
+        # Skip edit-landing page - no backlinks needed
+        if src_uri == 'edit-landing.md':
+            return markdown
+        
         backlinks = _backlinks_cache.get(src_uri, [])
 
         # Build folded admonition
