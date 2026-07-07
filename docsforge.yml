@@ -48,7 +48,7 @@ plugins:
         name: 中文
         site_name: Lemma 数学百科
         site_description: 一本严谨的数学维基
-    docs_structure: folder
+    docs_structure: suffix
     fallback_to_default: true
 
 extra_css:
