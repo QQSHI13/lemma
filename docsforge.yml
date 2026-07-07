@@ -38,10 +38,21 @@ theme:
       icon: material/brightness-4
       name: Switch to light mode
 tikz: true
+plugins:
+  i18n:
+    languages:
+      - locale: en
+        name: English
+        default: true
+      - locale: zh
+        name: 中文
+        site_name: Lemma 数学百科
+        site_description: 一本严谨的数学维基
+    docs_structure: folder
+    fallback_to_default: true
+
 extra_css:
 - assets/css/lemma.css
-extra_javascript:
-- assets/js/i18n-nav.js
 markdown_extensions:
 - plugins.lemma_md
 - pymdownx.arithmatex:
@@ -78,13 +89,6 @@ hooks:
 - plugins/prerequisites_hook.py
 - plugins/backlinks_hook.py
 extra:
-  alternate:
-    - name: English
-      link: /
-      lang: en
-    - name: 中文
-      link: /zh/
-      lang: zh
   lemma:
     enabled: true
     areas:
