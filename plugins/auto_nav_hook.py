@@ -21,11 +21,13 @@ def on_config(config):
     lemma_extra = extra.get("lemma", {})
     area_order = lemma_extra.get("areas", [])
     
-    # Group pages by area (exclude Chinese pages from English nav, exclude edit-landing)
+    # Group pages by area (exclude Chinese translations from English nav, exclude edit-landing)
     area_pages = {}
     for row in conn.execute("SELECT id, name, area, file_path FROM concepts ORDER BY name"):
         if row["file_path"].startswith("zh/"):
-            continue  # Skip Chinese pages in English nav
+            continue  # Skip folder-style Chinese pages in English nav
+        if ".zh.md" in row["file_path"]:
+            continue  # Skip suffix-style Chinese translations in English nav
         if row["file_path"] == "edit-landing.md":
             continue  # Skip edit-landing page
         area = row["area"]

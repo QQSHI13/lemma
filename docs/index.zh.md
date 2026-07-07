@@ -1,6 +1,6 @@
 ---
 title: Lemma 数学百科
-area: zh-home
+area: home
 difficulty: 1
 status: draft
 quality_score: 0
