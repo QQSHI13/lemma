@@ -26,58 +26,45 @@ jobs:
         with:
           python-version: '3.12'
 
-      # Restore the incremental-build cache (source hashes + previous site
-      # output) so `docsforge build` rebuilds only changed pages/diagrams.
-      # The key covers only build-affecting inputs (not docs/**): content
-      # changes fall through to restore-keys and hit the hash-based
-      # incremental build instead of a full rebuild. Plugin/template changes
-      # bust the key for a clean rebuild (plugin code isn't hash-tracked).
-      # `!**/__pycache__/**` is required: hashFiles ignores .gitignore and
-      # importing plugins during the build creates __pycache__/*.pyc, whose
-      # bytes embed per-checkout source mtimes — the key would differ on
-      # every run and no cache would ever be reused.
+      - name: Install dependencies
+        run: |
+          pip install pyyaml
+          pip install docsforge
+
+      # The cache key must include the installed docsforge version: docsforge
+      # is installed unpinned (latest), and a version bump changes the theme
+      # templates and thus the build's stored theme signature. If the key only
+      # covered repo files (docsforge.yml, plugins, templates, scripts), a
+      # version upgrade would leave the key unchanged, restore the stale
+      # previous-version cache on every run, and then fail to save the rebuilt
+      # cache because the key already exists — so the cache could never update.
+      # Keying on the version gives a fresh key on every upgrade; the
+      # version-scoped restore-keys fallback still lets content-only changes
+      # (docs/** edits, which don't affect the key) hit the same-version cache
+      # and build incrementally.
+      - name: Compute cache key
+        id: cache-key
+        run: |
+          VER=$(python -c "import docsforge; print(docsforge.__version__)")
+          echo "docsforge-version=$VER" >> "$GITHUB_OUTPUT"
+          echo "key=lemma-site-${{ runner.os }}-$VER-${{ hashFiles('docsforge.yml', 'plugins/**', '!plugins/**/__pycache__/**', 'templates/**', 'scripts/**', 'pyproject.toml') }}" >> "$GITHUB_OUTPUT"
+
       - name: Restore build cache
         uses: actions/cache/restore@v6.1.0
         with:
           path: |
             .docsforge/cache
             site
-          key: lemma-site-${{ runner.os }}-${{ hashFiles('docsforge.yml', 'plugins/**', '!plugins/**/__pycache__/**', 'templates/**', 'scripts/**', 'pyproject.toml') }}
+          key: ${{ steps.cache-key.outputs.key }}
           restore-keys: |
+            lemma-site-${{ runner.os }}-${{ steps.cache-key.outputs.docsforge-version }}-
             lemma-site-${{ runner.os }}-
 
-      - name: Install dependencies
-        run: |
-          pip install pyyaml
-          pip install docsforge
-          
       - name: Install LaTeX for TikZ
         run: |
           sudo apt-get update
           sudo apt-get install -y texlive texlive-pictures dvisvgm
 
-      - name: Debug cache state
-        run: |
-          python - <<'EOF'
-          import json, os, hashlib, pathlib
-          from docsforge.cache import CacheManager, FileHasher, BuildPlanner
-          p = BuildPlanner(CacheManager(pathlib.Path('.docsforge/cache')), FileHasher())
-          print("cached pkg_version:", repr(p.pkg_version))
-          print("cached config_hash:", repr(p.config_hash))
-          print("cached theme_sig:", repr(p.theme_sig))
-          print("current pkg_version:", __import__('docsforge').__version__)
-          import docsforge
-          try:
-            cfg = __import__('yaml').safe_load(open('docsforge.yml'))
-          except Exception as e:
-            print("config read error:", e)
-          th = pathlib.Path(__import__('docsforge').__file__).parent / 'templates'
-          sig = p.theme_signature([str(th)])
-          print("computed theme_sig:", sig)
-          ch = p.hasher.hash_file(pathlib.Path('docsforge.yml'))
-          print("computed config_hash:", ch)
-          EOF
-        shell: bash
       - name: Build docs
         env:
           PYTHONPATH: ${{ github.workspace }}
@@ -94,7 +81,7 @@ jobs:
           path: |
             .docsforge/cache
             site
-          key: lemma-site-${{ runner.os }}-${{ hashFiles('docsforge.yml', 'plugins/**', '!plugins/**/__pycache__/**', 'templates/**', 'scripts/**', 'pyproject.toml') }}
+          key: ${{ steps.cache-key.outputs.key }}
 
       - name: Validate links and frontmatter
         run: python scripts/check_links.py
