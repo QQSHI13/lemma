@@ -33,7 +33,7 @@ jobs:
       # incremental build instead of a full rebuild. Plugin/template changes
       # bust the key for a clean rebuild (plugin code isn't hash-tracked).
       - name: Restore build cache
-        uses: actions/cache@v6.1.0
+        uses: actions/cache/restore@v6.1.0
         with:
           path: |
             .docsforge/cache
@@ -41,10 +41,6 @@ jobs:
           key: lemma-site-${{ runner.os }}-${{ hashFiles('docsforge.yml', 'plugins/**', 'templates/**', 'scripts/**', 'pyproject.toml') }}
           restore-keys: |
             lemma-site-${{ runner.os }}-
-          # The validate job can fail on content issues (check_links.py)
-          # unrelated to the build; still save the cache so incremental
-          # builds work on the next run.
-          save-always: true
 
       - name: Install dependencies
         run: |
@@ -60,6 +56,18 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: docsforge build
+
+      # Save the cache right after a successful build (before the unrelated
+      # link/frontmatter validation, which may fail on content issues and
+      # would otherwise skip the cache post-step).
+      - name: Save build cache
+        if: success()
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: |
+            .docsforge/cache
+            site
+          key: lemma-site-${{ runner.os }}-${{ hashFiles('docsforge.yml', 'plugins/**', 'templates/**', 'scripts/**', 'pyproject.toml') }}
 
       - name: Validate links and frontmatter
         run: python scripts/check_links.py
