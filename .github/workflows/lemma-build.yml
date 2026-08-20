@@ -32,13 +32,17 @@ jobs:
       # changes fall through to restore-keys and hit the hash-based
       # incremental build instead of a full rebuild. Plugin/template changes
       # bust the key for a clean rebuild (plugin code isn't hash-tracked).
+      # `!**/__pycache__/**` is required: hashFiles ignores .gitignore and
+      # importing plugins during the build creates __pycache__/*.pyc, whose
+      # bytes embed per-checkout source mtimes — the key would differ on
+      # every run and no cache would ever be reused.
       - name: Restore build cache
         uses: actions/cache/restore@v6.1.0
         with:
           path: |
             .docsforge/cache
             site
-          key: lemma-site-${{ runner.os }}-${{ hashFiles('docsforge.yml', 'plugins/**', 'templates/**', 'scripts/**', 'pyproject.toml') }}
+          key: lemma-site-${{ runner.os }}-${{ hashFiles('docsforge.yml', 'plugins/**', '!plugins/**/__pycache__/**', 'templates/**', 'scripts/**', 'pyproject.toml') }}
           restore-keys: |
             lemma-site-${{ runner.os }}-
 
@@ -55,6 +59,7 @@ jobs:
       - name: Build docs
         env:
           PYTHONPATH: ${{ github.workspace }}
+          PYTHONDONTWRITEBYTECODE: '1'
         run: docsforge build
 
       # Save the cache right after a successful build (before the unrelated
@@ -67,7 +72,7 @@ jobs:
           path: |
             .docsforge/cache
             site
-          key: lemma-site-${{ runner.os }}-${{ hashFiles('docsforge.yml', 'plugins/**', 'templates/**', 'scripts/**', 'pyproject.toml') }}
+          key: lemma-site-${{ runner.os }}-${{ hashFiles('docsforge.yml', 'plugins/**', '!plugins/**/__pycache__/**', 'templates/**', 'scripts/**', 'pyproject.toml') }}
 
       - name: Validate links and frontmatter
         run: python scripts/check_links.py
