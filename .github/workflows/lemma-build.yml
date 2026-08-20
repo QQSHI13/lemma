@@ -56,16 +56,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y texlive texlive-pictures dvisvgm
 
-      - name: Inspect restored cache (temporary debug)
-        run: |
-          echo "== .docsforge/cache =="
-          ls -la .docsforge/cache 2>/dev/null | head -20 || echo "NO .docsforge/cache DIR"
-          for f in pkg_version theme_sig config_hash; do
-            echo "$f=$(cat .docsforge/cache/$f 2>/dev/null || echo MISSING)"
-          done
-          echo "== current values =="
-          python -c "import docsforge; print('docsforge.__version__ =', docsforge.__version__); from docsforge.cache import FileHasher; from pathlib import Path; print('cfg hash =', FileHasher.hash_file(Path('docsforge.yml')))"
-
       - name: Build docs
         env:
           PYTHONPATH: ${{ github.workspace }}
