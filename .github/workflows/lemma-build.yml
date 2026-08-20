@@ -26,6 +26,26 @@ jobs:
         with:
           python-version: '3.12'
 
+      # Restore the incremental-build cache (source hashes + previous site
+      # output) so `docsforge build` rebuilds only changed pages/diagrams.
+      # The key covers only build-affecting inputs (not docs/**): content
+      # changes fall through to restore-keys and hit the hash-based
+      # incremental build instead of a full rebuild. Plugin/template changes
+      # bust the key for a clean rebuild (plugin code isn't hash-tracked).
+      - name: Restore build cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: |
+            .docsforge/cache
+            site
+          key: lemma-site-${{ runner.os }}-${{ hashFiles('docsforge.yml', 'plugins/**', 'templates/**', 'scripts/**', 'pyproject.toml') }}
+          restore-keys: |
+            lemma-site-${{ runner.os }}-
+          # The validate job can fail on content issues (check_links.py)
+          # unrelated to the build; still save the cache so incremental
+          # builds work on the next run.
+          save-always: true
+
       - name: Install dependencies
         run: |
           pip install pyyaml
