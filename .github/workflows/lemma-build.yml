@@ -56,6 +56,28 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y texlive texlive-pictures dvisvgm
 
+      - name: Debug cache state
+        run: |
+          python - <<'EOF'
+          import json, os, hashlib, pathlib
+          from docsforge.cache import CacheManager, FileHasher, BuildPlanner
+          p = BuildPlanner(CacheManager(pathlib.Path('.docsforge/cache')), FileHasher())
+          print("cached pkg_version:", repr(p.pkg_version))
+          print("cached config_hash:", repr(p.config_hash))
+          print("cached theme_sig:", repr(p.theme_sig))
+          print("current pkg_version:", __import__('docsforge').__version__)
+          import docsforge
+          try:
+            cfg = __import__('yaml').safe_load(open('docsforge.yml'))
+          except Exception as e:
+            print("config read error:", e)
+          th = pathlib.Path(__import__('docsforge').__file__).parent / 'templates'
+          sig = p.theme_signature([str(th)])
+          print("computed theme_sig:", sig)
+          ch = p.hasher.hash_file(pathlib.Path('docsforge.yml'))
+          print("computed config_hash:", ch)
+          EOF
+        shell: bash
       - name: Build docs
         env:
           PYTHONPATH: ${{ github.workspace }}
