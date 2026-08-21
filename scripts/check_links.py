@@ -180,6 +180,18 @@ def validate_frontmatter(md_file: Path, content: str, concepts: dict) -> list[st
     return violations
 
 
+def strip_code_blocks(content: str) -> str:
+    """Remove fenced code blocks and inline code spans.
+
+    Links inside code are illustrative examples (e.g. the page-structure
+    template in edit-landing.md), not real links — checking them produced
+    false 'broken link' failures.
+    """
+    content = re.sub(r"^```.*?^```", "", content, flags=re.S | re.M)
+    content = re.sub(r"^~~~.*?^~~~", "", content, flags=re.S | re.M)
+    return re.sub(r"`[^`\n]+`", "", content)
+
+
 def resolve_link(target: str, from_file: Path) -> Path | None:
     """Resolve a markdown link target relative to the source file."""
     if target.startswith('/'):
@@ -236,8 +248,9 @@ def check_all(strict: bool = False):
         if is_index and not strict:
             continue
 
-        # Check standard markdown links
-        md_links = re.findall(r'\[([^\]]+)\]\(([^)]+)\)', content)
+        # Check standard markdown links (code blocks excluded: links in
+        # fenced examples are documentation, not real navigation targets)
+        md_links = re.findall(r'\[([^\]]+)\]\(([^)]+)\)', strip_code_blocks(content))
         for text, target in md_links:
             stats["total_links"] += 1
             if target.startswith(('http://', 'https://', 'mailto:', '#', 'data:')):

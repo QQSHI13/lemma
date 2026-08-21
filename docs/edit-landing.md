@@ -1,6 +1,7 @@
 ---
 title: Edit Landing
 area: home
+difficulty: 1
 edit_url: ""
 ---
 
